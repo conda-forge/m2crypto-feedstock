@@ -1,4 +1,4 @@
-{% set version = "0.23.0" %}
+{% set version = "0.24.0" %}
 
 package:
   name: m2crypto
@@ -7,11 +7,7 @@ package:
 source:
   fn: M2Crypto-{{ version }}.tar.gz
   url: https://pypi.python.org/packages/source/M/M2Crypto/M2Crypto-{{ version }}.tar.gz
-  md5: 89557730e245294a6cab06de8ad4fb42
-
-  patches:
-    # Sets the OPENSSL_PATH env variable to use OpenSSL from conda and not the system
-    - setup.patch
+  md5: 8e87235942c76d1ba9f999ee33764fdb
 
 build:
   number: 0
