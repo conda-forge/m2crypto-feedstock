@@ -1,4 +1,5 @@
 #!/bin/bash
 
-# Set the OPENSSL prefix so it doesn't link to /usr/lib/libssl
-OPENSSL_PATH=$PREFIX $PYTHON setup.py install --single-version-externally-managed --record record.txt
+# Use PREFIX to use conda openssl
+$PYTHON setup.py build build_ext --openssl $PREFIX
+$PYTHON setup.py install --single-version-externally-managed --record record.txt
