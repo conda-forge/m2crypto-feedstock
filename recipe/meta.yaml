@@ -10,7 +10,7 @@ source:
   md5: 8e87235942c76d1ba9f999ee33764fdb
 
 build:
-  number: 0
+  number: 1
   skip: True  # [py3k]
   preserve_egg_dir: yes
 
@@ -19,11 +19,11 @@ requirements:
     - python
     - setuptools
     - swig
-    - openssl 1.0*
+    - openssl 1.0.*
   run:
     - python
     - distribute
-    - openssl 1.0*
+    - openssl 1.0.*
 
 test:
   imports:
