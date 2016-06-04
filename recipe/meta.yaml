@@ -11,7 +11,7 @@ source:
 
 build:
   number: 0
-  skip: True  # [py3k]
+  skip: True  # [not win or py3k]
   preserve_egg_dir: yes
 
 requirements:
@@ -31,9 +31,9 @@ test:
     - M2Crypto.SSL
 
 about:
-  home: https://github.com/martinpaljak/M2Crypto
+  home: https://gitlab.com/m2crypto/m2crypto
   license: MIT License
-  summary: 'M2Crypto: A Python crypto and SSL toolkit'
+  summary: M2Crypto: A Python crypto and SSL toolkit
 
 extra:
   recipe-maintainers:
