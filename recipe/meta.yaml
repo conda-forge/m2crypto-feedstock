@@ -13,7 +13,7 @@ source:
   md5: 8e87235942c76d1ba9f999ee33764fdb  # [not win]
   fn: M2CryptoWin64-{{ version_windows_pypi }}.tar.gz  # [win]
   url: https://pypi.python.org/packages/source/M/M2CryptoWin64/M2CryptoWin64-{{ version_windows_pypi }}.tar.gz  # [win]
-  sha1: A7C5AAF01D08CBB842972BC1E9547E5CF5E989BD  # [win]
+  sha1: a7c5aaf01d08cbb842972bc1e9547e5cf5e989bd  # [win]
 
 build:
   number: 1
