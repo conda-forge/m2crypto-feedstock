@@ -17,7 +17,7 @@ source:
 
 build:
   number: 1
-  skip: True  # [win or py3k]
+  skip: True  # [py3k]
   preserve_egg_dir: yes
 
 requirements:
