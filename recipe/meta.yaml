@@ -16,8 +16,8 @@ source:
   sha1: A7C5AAF01D08CBB842972BC1E9547E5CF5E989BD  # [win]
 
 build:
-  number: 0
-  skip: True  # [py3k]
+  number: 1
+  skip: True  # [win or py3k]
   preserve_egg_dir: yes
 
 requirements:
@@ -25,11 +25,11 @@ requirements:
     - python
     - setuptools
     - swig
-    - openssl 1.0*
+    - openssl 1.0.*
   run:
     - python
     - distribute
-    - openssl 1.0*
+    - openssl 1.0.*
 
 test:
   imports:
@@ -37,7 +37,7 @@ test:
     - M2Crypto.SSL
 
 about:
-  home: https://github.com/martinpaljak/M2Crypto
+  home: https://gitlab.com/m2crypto/m2crypto
   license: MIT License
   summary: 'M2Crypto: A Python crypto and SSL toolkit'
 
