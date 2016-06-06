@@ -1,17 +1,23 @@
 {% set version = "0.24.0" %}
+{% set version_windows = "0.21.1" %}
+{% set version_windows_pypi = "0.21.1-3" %}
 
 package:
   name: m2crypto
-  version: {{ version }}
+  version: {{ version }}  # [not win]
+  version: {{ version_windows }}  # [win]
 
 source:
-  fn: M2Crypto-{{ version }}.tar.gz
-  url: https://pypi.python.org/packages/source/M/M2Crypto/M2Crypto-{{ version }}.tar.gz
-  md5: 8e87235942c76d1ba9f999ee33764fdb
+  fn: M2Crypto-{{ version }}.tar.gz  # [not win]
+  url: https://pypi.python.org/packages/source/M/M2Crypto/M2Crypto-{{ version }}.tar.gz  # [not win]
+  md5: 8e87235942c76d1ba9f999ee33764fdb  # [not win]
+  fn: M2CryptoWin64-{{ version_windows_pypi }}.tar.gz  # [win]
+  url: https://pypi.python.org/packages/source/M/M2CryptoWin64/M2CryptoWin64-{{ version_windows_pypi }}.tar.gz  # [win]
+  sha1: a7c5aaf01d08cbb842972bc1e9547e5cf5e989bd  # [win]
 
 build:
   number: 1
-  skip: True  # [win or py3k]
+  skip: True  # [py3k]
   preserve_egg_dir: yes
 
 requirements:
