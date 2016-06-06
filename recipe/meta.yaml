@@ -1,5 +1,6 @@
 {% set version = "0.24.0" %}
-{% set version_windows = "0.21.1-3" %}
+{% set version_windows = "0.21.1" %}
+{% set version_windows_pypi = "0.21.1-3" %}
 
 package:
   name: m2crypto
@@ -10,8 +11,8 @@ source:
   fn: M2Crypto-{{ version }}.tar.gz  # [not win]
   url: https://pypi.python.org/packages/source/M/M2Crypto/M2Crypto-{{ version }}.tar.gz  # [not win]
   md5: 8e87235942c76d1ba9f999ee33764fdb  # [not win]
-  fn: M2CryptoWin64-{{ version_windows }}.tar.gz  # [win]
-  url: https://pypi.python.org/packages/source/M/M2CryptoWin64/M2CryptoWin64-{{ version }}.tar.gz  # [win]
+  fn: M2CryptoWin64-{{ version_windows_pypi }}.tar.gz  # [win]
+  url: https://pypi.python.org/packages/source/M/M2CryptoWin64/M2CryptoWin64-{{ version_windows_pypi }}.tar.gz  # [win]
   sha1: A7C5AAF01D08CBB842972BC1E9547E5CF5E989BD  # [win]
 
 build:
