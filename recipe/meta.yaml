@@ -14,7 +14,7 @@ source:
   fn: M2CryptoWin64-{{ version_windows_pypi }}.tar.gz  # [win64]
   url: https://pypi.python.org/packages/source/M/M2CryptoWin64/M2CryptoWin64-{{ version_windows_pypi }}.tar.gz  # [win64]
   sha1: a7c5aaf01d08cbb842972bc1e9547e5cf5e989bd  # [win64]
-  fn: M2CryptoWin64-{{ version_windows_pypi }}.tar.gz  # [win32]
+  fn: M2CryptoWin32-{{ version_windows_pypi }}.tar.gz  # [win32]
   url: https://pypi.python.org/packages/source/M/M2CryptoWin32/M2CryptoWin32-{{ version_windows_pypi }}.tar.gz  # [win32]
   sha256: 5497e113980a5f7a925512168ed5e6fc5d9c858632c2953f010f0818a459e19d  # [win32]
 
