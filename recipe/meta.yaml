@@ -11,13 +11,16 @@ source:
   fn: M2Crypto-{{ version }}.tar.gz  # [not win]
   url: https://pypi.python.org/packages/source/M/M2Crypto/M2Crypto-{{ version }}.tar.gz  # [not win]
   md5: 8e87235942c76d1ba9f999ee33764fdb  # [not win]
-  fn: M2CryptoWin64-{{ version_windows_pypi }}.tar.gz  # [win]
-  url: https://pypi.python.org/packages/source/M/M2CryptoWin64/M2CryptoWin64-{{ version_windows_pypi }}.tar.gz  # [win]
-  sha1: a7c5aaf01d08cbb842972bc1e9547e5cf5e989bd  # [win]
+  fn: M2CryptoWin64-{{ version_windows_pypi }}.tar.gz  # [win64]
+  url: https://pypi.python.org/packages/source/M/M2CryptoWin64/M2CryptoWin64-{{ version_windows_pypi }}.tar.gz  # [win64]
+  sha1: a7c5aaf01d08cbb842972bc1e9547e5cf5e989bd  # [win64]
+  fn: M2CryptoWin64-{{ version_windows_pypi }}.tar.gz  # [win32]
+  url: https://pypi.python.org/packages/source/M/M2CryptoWin32/M2CryptoWin32-{{ version_windows_pypi }}.tar.gz  # [win32]
+  sha256: 5497e113980a5f7a925512168ed5e6fc5d9c858632c2953f010f0818a459e19d  # [win32]
 
 build:
   number: 1
-  skip: True  # [win32 or py3k]
+  skip: True  # [py3k]
   preserve_egg_dir: yes
 
 requirements:
