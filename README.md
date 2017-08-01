@@ -11,6 +11,18 @@ Summary: M2Crypto: A Python crypto and SSL toolkit
 
 
 
+Current build status
+====================
+
+Linux: [![Circle CI](https://circleci.com/gh/conda-forge/m2crypto-feedstock.svg?style=shield)](https://circleci.com/gh/conda-forge/m2crypto-feedstock)
+OSX: [![TravisCI](https://travis-ci.org/conda-forge/m2crypto-feedstock.svg?branch=master)](https://travis-ci.org/conda-forge/m2crypto-feedstock)
+Windows: [![AppVeyor](https://ci.appveyor.com/api/projects/status/github/conda-forge/m2crypto-feedstock?svg=True)](https://ci.appveyor.com/project/conda-forge/m2crypto-feedstock/branch/master)
+
+Current release info
+====================
+Version: [![Anaconda-Server Badge](https://anaconda.org/conda-forge/m2crypto/badges/version.svg)](https://anaconda.org/conda-forge/m2crypto)
+Downloads: [![Anaconda-Server Badge](https://anaconda.org/conda-forge/m2crypto/badges/downloads.svg)](https://anaconda.org/conda-forge/m2crypto)
+
 Installing m2crypto
 ===================
 
@@ -31,7 +43,6 @@ It is possible to list all of the versions of `m2crypto` available on your platf
 ```
 conda search m2crypto --channel conda-forge
 ```
-
 
 
 About conda-forge
@@ -67,18 +78,6 @@ Terminology
 
 **conda-forge** - the place where the feedstock and smithy live and work to
                   produce the finished article (built conda distributions)
-
-Current build status
-====================
-
-Linux: [![Circle CI](https://circleci.com/gh/conda-forge/m2crypto-feedstock.svg?style=shield)](https://circleci.com/gh/conda-forge/m2crypto-feedstock)
-OSX: [![TravisCI](https://travis-ci.org/conda-forge/m2crypto-feedstock.svg?branch=master)](https://travis-ci.org/conda-forge/m2crypto-feedstock)
-Windows: [![AppVeyor](https://ci.appveyor.com/api/projects/status/github/conda-forge/m2crypto-feedstock?svg=True)](https://ci.appveyor.com/project/conda-forge/m2crypto-feedstock/branch/master)
-
-Current release info
-====================
-Version: [![Anaconda-Server Badge](https://anaconda.org/conda-forge/m2crypto/badges/version.svg)](https://anaconda.org/conda-forge/m2crypto)
-Downloads: [![Anaconda-Server Badge](https://anaconda.org/conda-forge/m2crypto/badges/downloads.svg)](https://anaconda.org/conda-forge/m2crypto)
 
 
 Updating m2crypto-feedstock
