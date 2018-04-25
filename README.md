@@ -3,7 +3,7 @@ About m2crypto
 
 Home: https://gitlab.com/m2crypto/m2crypto
 
-Package license: MIT License
+Package license: MIT
 
 Feedstock license: BSD 3-Clause
 
@@ -14,14 +14,16 @@ Summary: M2Crypto: A Python crypto and SSL toolkit
 Current build status
 ====================
 
-Linux: [![Circle CI](https://circleci.com/gh/conda-forge/m2crypto-feedstock.svg?style=shield)](https://circleci.com/gh/conda-forge/m2crypto-feedstock)
-OSX: [![TravisCI](https://travis-ci.org/conda-forge/m2crypto-feedstock.svg?branch=master)](https://travis-ci.org/conda-forge/m2crypto-feedstock)
-Windows: [![AppVeyor](https://ci.appveyor.com/api/projects/status/github/conda-forge/m2crypto-feedstock?svg=True)](https://ci.appveyor.com/project/conda-forge/m2crypto-feedstock/branch/master)
+[![Linux](https://img.shields.io/circleci/project/github/conda-forge/m2crypto-feedstock/master.svg?label=Linux)](https://circleci.com/gh/conda-forge/m2crypto-feedstock)
+[![OSX](https://img.shields.io/travis/conda-forge/m2crypto-feedstock/master.svg?label=macOS)](https://travis-ci.org/conda-forge/m2crypto-feedstock)
+[![Windows](https://img.shields.io/appveyor/ci/conda-forge/m2crypto-feedstock/master.svg?label=Windows)](https://ci.appveyor.com/project/conda-forge/m2crypto-feedstock/branch/master)
 
 Current release info
 ====================
-Version: [![Anaconda-Server Badge](https://anaconda.org/conda-forge/m2crypto/badges/version.svg)](https://anaconda.org/conda-forge/m2crypto)
-Downloads: [![Anaconda-Server Badge](https://anaconda.org/conda-forge/m2crypto/badges/downloads.svg)](https://anaconda.org/conda-forge/m2crypto)
+
+| Name | Downloads | Version | Platforms |
+| --- | --- | --- | --- |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-m2crypto-green.svg)](https://anaconda.org/conda-forge/m2crypto) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/m2crypto.svg)](https://anaconda.org/conda-forge/m2crypto) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/m2crypto.svg)](https://anaconda.org/conda-forge/m2crypto) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/m2crypto.svg)](https://anaconda.org/conda-forge/m2crypto) |
 
 Installing m2crypto
 ===================
@@ -66,6 +68,7 @@ To manage the continuous integration and simplify feedstock maintenance
 Using the ``conda-forge.yml`` within this repository, it is possible to re-render all of
 this feedstock's supporting files (e.g. the CI configuration files) with ``conda smithy rerender``.
 
+For more information please check the [conda-forge documentation](https://conda-forge.org/docs/).
 
 Terminology
 ===========
