@@ -19,11 +19,11 @@ requirements:
     - python
     - swig >=2.0.4
     - setuptools
-    - openssl 1.0.*
+    - openssl
   run:
     - python
     - typing  # [py<35]
-    - openssl 1.0.*
+    - openssl
 
 test:
   imports:
