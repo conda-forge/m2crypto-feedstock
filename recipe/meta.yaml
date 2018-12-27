@@ -33,6 +33,7 @@ test:
 about:
   home: https://gitlab.com/m2crypto/m2crypto
   license: MIT
+  license_file: LICENCE
   summary: 'M2Crypto: A Python crypto and SSL toolkit'
 
 extra:
