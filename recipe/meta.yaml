@@ -10,18 +10,20 @@ source:
   sha256: fd59a9705275d609948005f4cbcaf25f28a4271308237eb166169528692ce498
 
 build:
-  number: 0
+  number: 1
 
 requirements:
+  build:
+    - {{ compiler("c") }}
   host:
     - python
     - swig >=2.0.4
     - setuptools
-    - openssl 1.0.*
+    - openssl
   run:
     - python
     - typing  # [py<35]
-    - openssl 1.0.*
+    - openssl
 
 test:
   imports:
@@ -31,6 +33,7 @@ test:
 about:
   home: https://gitlab.com/m2crypto/m2crypto
   license: MIT
+  license_file: LICENCE
   summary: 'M2Crypto: A Python crypto and SSL toolkit'
 
 extra:
