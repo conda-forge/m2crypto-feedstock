@@ -9,7 +9,7 @@ source:
   sha256: 1542c18e3ee5c01db5031d0b594677536963e3f54ecdf5315aeecb3a595b4dc1
 
 build:
-  number: 0
+  number: 1
   skip: true  # [aarch64 or ppc64le or win]
   script: '$PYTHON -m pip install --global-option="build_ext" --global-option="--openssl=$PREFIX" . -vv'
 
@@ -21,7 +21,7 @@ requirements:
     - pip
     - swig >=2.0.4
     - setuptools
-    - openssl =1.0
+    - openssl
   run:
     - python =2.7
     - typing
