@@ -10,6 +10,7 @@ source:
 
 build:
   number: 0
+  skip: true  # [aarch64 or ppc64le]
   script: '$PYTHON -m pip install --global-option="build_ext" --global-option="--openssl=$PREFIX" . -vv'
 
 requirements:
