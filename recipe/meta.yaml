@@ -9,19 +9,21 @@ source:
   sha256: 1542c18e3ee5c01db5031d0b594677536963e3f54ecdf5315aeecb3a595b4dc1
 
 build:
-  number: 1
+  number: 0
+  script: '$PYTHON -m pip install --global-option="build_ext" --global-option="--openssl=$PREFIX" . -vv'
 
 requirements:
   build:
     - {{ compiler("c") }}
   host:
-    - python
+    - python =2.7
+    - pip
     - swig >=2.0.4
     - setuptools
-    - openssl
+    - openssl =1.0
   run:
-    - python
-    - typing  # [py<35]
+    - python =2.7
+    - typing
     - openssl
 
 test:
