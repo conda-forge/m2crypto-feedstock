@@ -1,4 +1,4 @@
-{% set version = "0.36.0" %}
+{% set version = "0.37.0" %}
 
 package:
   name: m2crypto
@@ -6,10 +6,10 @@ package:
 
 source:
   url: https://pypi.python.org/packages/source/M/M2Crypto/M2Crypto-{{ version }}.tar.gz
-  sha256: 1542c18e3ee5c01db5031d0b594677536963e3f54ecdf5315aeecb3a595b4dc1
+  sha256: b9018c576164e4a4be8d3212447ebbbdfe379d64c231997e6a0bcc3904f5414b
 
 build:
-  number: 1
+  number: 0
 
 requirements:
   build:
