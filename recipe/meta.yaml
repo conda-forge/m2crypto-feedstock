@@ -11,9 +11,12 @@ source:
   patches:
     # remove parameterized from install_requires, it's only used in the tests
     - no-parameterized.patch
+    # set default_openssl path to conda prefix
+    - openssl_default.patch
 
 build:
   number: 1
+  script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
   build:
