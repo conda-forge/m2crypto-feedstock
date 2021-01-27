@@ -7,6 +7,9 @@ package:
 source:
   url: https://pypi.python.org/packages/source/M/M2Crypto/M2Crypto-{{ version }}.tar.gz
   sha256: e4e42f068b78ccbf113e5d0a72ae5f480f6c3ace4940b91e4fff5598cfff6fb3
+  patches:
+    # remove parameterized from install_requires, it's only used in the tests
+    - no-parameterized.patch
 
 build:
   number: 1
