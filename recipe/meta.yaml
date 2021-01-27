@@ -28,6 +28,10 @@ test:
   imports:
     - M2Crypto
     - M2Crypto.SSL
+  commands:
+    - pip check
+  requires:
+    - pip
 
 about:
   home: https://gitlab.com/m2crypto/m2crypto
