@@ -23,6 +23,7 @@ requirements:
     - {{ compiler("c") }}
   host:
     - openssl
+    - pip
     - python
     - setuptools
     - swig >=2.0.4
