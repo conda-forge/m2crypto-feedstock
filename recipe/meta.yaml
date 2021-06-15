@@ -9,8 +9,6 @@ source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: 99f2260a30901c949a8dc6d5f82cd5312ffb8abc92e76633baf231bbbcb2decb
   patches:
-    # remove parameterized from install_requires, it's only used in the tests
-    - no-parameterized.patch
     # set default_openssl path to conda prefix
     - openssl_default.patch
 
