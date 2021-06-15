@@ -1,5 +1,5 @@
 {% set name = "M2Crypto" %}
-{% set version = "0.37.1" %}
+{% set version = "0.38.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,15 +7,13 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: e4e42f068b78ccbf113e5d0a72ae5f480f6c3ace4940b91e4fff5598cfff6fb3
+  sha256: 99f2260a30901c949a8dc6d5f82cd5312ffb8abc92e76633baf231bbbcb2decb
   patches:
-    # remove parameterized from install_requires, it's only used in the tests
-    - no-parameterized.patch
     # set default_openssl path to conda prefix
     - openssl_default.patch
 
 build:
-  number: 1
+  number: 0
   script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
@@ -37,7 +35,7 @@ test:
     - M2Crypto.SSL
   commands:
     - pip check
-    - 'python -m pytest tests/ -v -rs -k "not test_ssl"'
+    - python -m pytest tests/ -v -rs -k "not test_ssl"
   requires:
     - parameterized
     - pip
