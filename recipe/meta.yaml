@@ -45,6 +45,9 @@ test:
     - parameterized
     - pip
     - pytest
+    # Deprecation notice causes tests to fail
+    # https://github.com/pypa/setuptools/commit/1701579e0827317d8888c2254a17b5786b6b5246
+    - setuptools <59.6.0
   source_files:
     - tests
 
