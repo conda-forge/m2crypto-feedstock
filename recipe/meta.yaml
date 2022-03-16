@@ -1,5 +1,5 @@
 {% set name = "M2Crypto" %}
-{% set version = "0.38.0" %}
+{% set version = "0.37.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,17 +7,24 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 99f2260a30901c949a8dc6d5f82cd5312ffb8abc92e76633baf231bbbcb2decb
+  sha256: e4e42f068b78ccbf113e5d0a72ae5f480f6c3ace4940b91e4fff5598cfff6fb3
   patches:
+    # remove parameterized from install_requires, it's only used in the tests
+    - no-parameterized.patch
+    # Newer OpenSSL 1.1.1 releases expose a bug in the tests
+    - 262.patch
     # set default_openssl path to conda prefix
     - openssl_default.patch
 
 build:
-  number: 1
+  number: 2
   script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
   build:
+    - python                                 # [build_platform != target_platform]
+    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
+    - swig                                   # [build_platform != target_platform]
     - {{ compiler("c") }}
   host:
     - openssl
@@ -40,6 +47,9 @@ test:
     - parameterized
     - pip
     - pytest
+    # Deprecation notice causes tests to fail
+    # https://github.com/pypa/setuptools/commit/1701579e0827317d8888c2254a17b5786b6b5246
+    - setuptools <59.6.0
   source_files:
     - tests
 
