@@ -11,6 +11,8 @@ source:
   patches:
     # remove parameterized from install_requires, it's only used in the tests
     - no-parameterized.patch
+    # Newer OpenSSL 1.1.1 releases expose a bug in the tests
+    - 262.patch
     # set default_openssl path to conda prefix
     - openssl_default.patch
 
