@@ -18,7 +18,7 @@ source:
     # https://gitlab.com/m2crypto/m2crypto/-/issues/298
     - Remove-buggy-ifdef-statements-m2crypto-298.patch
     # Fix Windows issue in fedora's patches
-    - Fix-use-of-ctypes.cdll.LoadLibrary-for-Windows.patch
+    - Remove-OpenSSL-1.0.0-support-to-avoid-windows-issues.patch
 
 build:
   number: 2
