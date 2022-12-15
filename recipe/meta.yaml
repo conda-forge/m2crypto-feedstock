@@ -21,7 +21,7 @@ source:
     - Remove-OpenSSL-1.0.0-support-to-avoid-windows-issues.patch
 
 build:
-  number: 2
+  number: 3
   script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
