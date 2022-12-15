@@ -17,6 +17,8 @@ source:
     - m2crypto-0.38-ossl3-tests-evp.patch
     # https://gitlab.com/m2crypto/m2crypto/-/issues/298
     - Remove-buggy-ifdef-statements-m2crypto-298.patch
+    # Fix Windows issue in fedora's patches
+    - Fix-use-of-ctypes.cdll.LoadLibrary-for-Windows.patch
 
 build:
   number: 2
