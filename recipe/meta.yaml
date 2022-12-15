@@ -11,6 +11,10 @@ source:
   patches:
     # set default_openssl path to conda prefix
     - openssl_default.patch
+    # OpenSSL 3 patches (from fedora)
+    - m2crypto-MR271-opensslversion.patch
+    - m2crypto-0.38-ossl3-tests.patch
+    - m2crypto-0.38-ossl3-tests-evp.patch
 
 build:
   number: 2
