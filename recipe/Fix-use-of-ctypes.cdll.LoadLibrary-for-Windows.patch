@@ -20,7 +20,7 @@ index 444c369..c881a82 100644
 +        import ctypes.util
 +        libssl_path = ctypes.util.find_library("ssl")
 +        if libssl_path is None and sys.platform == "win32":
-+            libssl_path = os.path.join(os.environ["CONDA_PREFIX"], "Library", "lib", "libssl.lib")
++            libssl_path = os.path.join(os.environ["PREFIX"], "Library", "lib", "libssl.lib")
 +        if libssl_path is None:
 +            raise NotImplementedError("Did not find libssl")
 +        libssl = ctypes.cdll.LoadLibrary(libssl_path)
