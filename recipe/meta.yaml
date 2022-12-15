@@ -11,6 +11,14 @@ source:
   patches:
     # set default_openssl path to conda prefix
     - openssl_default.patch
+    # OpenSSL 3 patches (from fedora)
+    - m2crypto-MR271-opensslversion.patch
+    - m2crypto-0.38-ossl3-tests.patch
+    - m2crypto-0.38-ossl3-tests-evp.patch
+    # https://gitlab.com/m2crypto/m2crypto/-/issues/298
+    - Remove-buggy-ifdef-statements-m2crypto-298.patch
+    # Fix Windows issue in fedora's patches
+    - Remove-OpenSSL-1.0.0-support-to-avoid-windows-issues.patch
 
 build:
   number: 2
