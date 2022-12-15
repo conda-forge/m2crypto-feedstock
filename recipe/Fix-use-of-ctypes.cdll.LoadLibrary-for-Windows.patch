@@ -1,17 +1,17 @@
-From 3e0df444bf61c58b554a774245ca466bfdf17062 Mon Sep 17 00:00:00 2001
+From 005a33ec7905b83e08d109287e4ba6126bdeaada Mon Sep 17 00:00:00 2001
 From: Chris Burr <christopher.burr@cern.ch>
 Date: Thu, 15 Dec 2022 09:36:51 +0100
 Subject: [PATCH] Fix use of ctypes.cdll.LoadLibrary for Windows
 
 ---
- setup.py | 7 +++++--
- 1 file changed, 5 insertions(+), 2 deletions(-)
+ setup.py | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
 
 diff --git a/setup.py b/setup.py
-index 444c369..e0c9c27 100644
+index 444c369..c881a82 100644
 --- a/setup.py
 +++ b/setup.py
-@@ -76,8 +76,11 @@ def openssl_version(ossldir, req_ver, required=False):
+@@ -76,8 +76,13 @@ def openssl_version(ossldir, req_ver, required=False):
               OpenSSL has been installed.
      """
      try:
@@ -19,6 +19,8 @@ index 444c369..e0c9c27 100644
 -        libssl = ctypes.cdll.LoadLibrary("libssl.so")
 +        import ctypes.util
 +        libssl_path = ctypes.util.find_library("ssl")
++        if libssl_path is None and sys.platform == "win32":
++            libssl_path = os.path.join(os.environ["CONDA_PREFIX"], "Library", "lib", "libssl.lib")
 +        if libssl_path is None:
 +            raise NotImplementedError("Did not find libssl")
 +        libssl = ctypes.cdll.LoadLibrary(libssl_path)
