@@ -1,5 +1,5 @@
 {% set name = "M2Crypto" %}
-{% set version = "0.38.0" %}
+{% set version = "0.41.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 99f2260a30901c949a8dc6d5f82cd5312ffb8abc92e76633baf231bbbcb2decb
+  sha256: 3a1358c7ee849046d91782a777f1786bf027a1c1d51b5faf8f19435bfc3f1495
   patches:
     # set default_openssl path to conda prefix
     - openssl_default.patch
@@ -21,7 +21,7 @@ source:
     - Remove-OpenSSL-1.0.0-support-to-avoid-windows-issues.patch
 
 build:
-  number: 2
+  number: 0
   script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
