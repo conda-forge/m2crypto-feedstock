@@ -8,21 +8,11 @@ package:
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: 3a1358c7ee849046d91782a777f1786bf027a1c1d51b5faf8f19435bfc3f1495
-  patches:
-    # set default_openssl path to conda prefix
-    - openssl_default.patch
-    # OpenSSL 3 patches (from fedora)
-    - m2crypto-MR271-opensslversion.patch
-    - m2crypto-0.38-ossl3-tests.patch
-    - m2crypto-0.38-ossl3-tests-evp.patch
-    # https://gitlab.com/m2crypto/m2crypto/-/issues/298
-    - Remove-buggy-ifdef-statements-m2crypto-298.patch
-    # Fix Windows issue in fedora's patches
-    - Remove-OpenSSL-1.0.0-support-to-avoid-windows-issues.patch
 
 build:
   number: 0
-  script: {{ PYTHON }} -m pip install . -vv
+  script: OPENSSL_PATH=$PREFIX {{ PYTHON }} -m pip install . -vv  # [not win]
+  script: "set \"OPENSSL_PATH=%LIBRARY_PREFIX%\" && {{ PYTHON }} -m pip install . -vv"  # [win]
 
 requirements:
   build:
