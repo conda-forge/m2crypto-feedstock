@@ -8,6 +8,8 @@ package:
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: 3a1358c7ee849046d91782a777f1786bf027a1c1d51b5faf8f19435bfc3f1495
+  patches:
+   - Remove-OpenSSL-1.0.0-support-to-avoid-windows-issues.patch
 
 build:
   number: 0
