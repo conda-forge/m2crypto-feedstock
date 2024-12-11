@@ -13,7 +13,10 @@ source:
 
 build:
   number: 1
-  script: OPENSSL_PATH=$PREFIX {{ PYTHON }} -m pip install . -vv  # [not win]
+  script: # [not win]
+    - sed -i.bak "/sys\/types.h/d" $PREFIX/include/openssl/e_os2.h  # [not win]
+    - OPENSSL_PATH=$PREFIX {{ PYTHON }} -m pip install . -vv  # [not win]
+    - mv $PREFIX/include/openssl/e_os2.h{.bak,}  # [not win]
   script: "set \"OPENSSL_PATH=%LIBRARY_PREFIX%\" && {{ PYTHON }} -m pip install . -vv"  # [win]
 
 requirements:
