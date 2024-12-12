@@ -1,0 +1,36 @@
+From e4ba4af0638e17127acab6b711cbbfbbf5754a51 Mon Sep 17 00:00:00 2001
+From: Chris Burr <christopher.burr@cern.ch>
+Date: Thu, 12 Dec 2024 23:37:12 +0100
+Subject: [PATCH] Fix building against OpenSSL in non-standard location
+
+---
+ setup.py | 12 ++++--------
+ 1 file changed, 4 insertions(+), 8 deletions(-)
+
+diff --git a/setup.py b/setup.py
+index 2a3fc15..f3d4936 100644
+--- a/setup.py
++++ b/setup.py
+@@ -214,15 +214,11 @@ class _M2CryptoBuildExt(build_ext.build_ext):
+             with open(
+                 "src/SWIG/x509_v_flag.h", "w", encoding="utf-8"
+             ) as x509_v_h:
++                cmd = [cpp]
++                cmd += os.environ.get("CFLAGS", "").split(" ")
++                cmd += ["-E", "-fdirectives-only", "-include", "openssl/x509_vfy.h", "-"]
+                 pid = subprocess.Popen(
+-                    [
+-                        cpp,
+-                        "-E",
+-                        "-fdirectives-only",
+-                        "-include",
+-                        "openssl/x509_vfy.h",
+-                        "-",
+-                    ],
++                    cmd,
+                     stdin=subprocess.PIPE,
+                     stdout=subprocess.PIPE,
+                     stderr=subprocess.PIPE,
+-- 
+2.47.0
+
