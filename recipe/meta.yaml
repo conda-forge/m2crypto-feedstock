@@ -1,5 +1,5 @@
 {% set name = "M2Crypto" %}
-{% set version = "0.41.0" %}
+{% set version = "0.43.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,12 +7,13 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 3a1358c7ee849046d91782a777f1786bf027a1c1d51b5faf8f19435bfc3f1495
+  sha256: 6c2c1c7bb0e8aa768f7ca803da7dbc2666d4003b26bd7adf70233afc59d8cf33
   patches:
    - Remove-OpenSSL-1.0.0-support-to-avoid-windows-issues.patch
+   - 0001-Fix-use-of-ERR_reason_error_string.patch
 
 build:
-  number: 1
+  number: 5
   script: # [not win]
     - sed -i.bak "/sys\/types.h/d" $PREFIX/include/openssl/e_os2.h  # [not win]
     - OPENSSL_PATH=$PREFIX {{ PYTHON }} -m pip install . -vv  # [not win]
@@ -25,6 +26,7 @@ requirements:
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
     - swig                                   # [build_platform != target_platform]
     - {{ compiler("c") }}
+    - {{ stdlib("c") }}
   host:
     - openssl
     - pip

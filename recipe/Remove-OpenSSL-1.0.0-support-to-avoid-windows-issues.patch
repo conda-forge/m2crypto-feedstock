@@ -1,4 +1,4 @@
-From 801f8ec44f32ee8e8cfebb63d2c80f98f7280f48 Mon Sep 17 00:00:00 2001
+From 57ce646d58f585228c3193482fa408c9c15c9820 Mon Sep 17 00:00:00 2001
 From: Chris Burr <christopher.burr@cern.ch>
 Date: Mon, 4 Mar 2024 00:15:05 +0100
 Subject: [PATCH] dsd
@@ -95,5 +95,5 @@ index 1d2e183..95e2d6c 100644
                                                  0x10100000, True):
                  ver_part += '-1_1'
 -- 
-2.39.3 (Apple Git-145)
+2.47.0
 
