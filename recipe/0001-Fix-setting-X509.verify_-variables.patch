@@ -1,0 +1,25 @@
+From a1ff070843bdaf7194773ba50905c29c4a2be81e Mon Sep 17 00:00:00 2001
+From: Chris Burr <christopher.burr@cern.ch>
+Date: Fri, 13 Dec 2024 00:30:07 +0100
+Subject: [PATCH] Fix setting X509.verify_* variables
+
+---
+ src/M2Crypto/X509.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/M2Crypto/X509.py b/src/M2Crypto/X509.py
+index 2043770..15fd516 100644
+--- a/src/M2Crypto/X509.py
++++ b/src/M2Crypto/X509.py
+@@ -21,7 +21,7 @@ FORMAT_PEM = 1
+ __g = globals()
+ for x in dir(m2):
+     if x.startswith('VERIFY_'):
+-        __g[x.lower()] = x
++        __g[x.lower()] = getattr(m2, x)
+ 
+ log = logging.getLogger(__name__)
+ 
+-- 
+2.47.0
+

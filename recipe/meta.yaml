@@ -11,6 +11,7 @@ source:
   patches:
    - 0001-Fix-use-of-ERR_reason_error_string.patch
    - 0001-Fix-building-against-OpenSSL-in-non-standard-locatio.patch
+   - 0001-Fix-setting-X509.verify_-variables.patch
 
 build:
   number: 0
