@@ -6,7 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name|lower }}-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name|lower }}-{{ version }}.tar.gz
   sha256: 6c2c1c7bb0e8aa768f7ca803da7dbc2666d4003b26bd7adf70233afc59d8cf33
   patches:
     - 0001-Fix-building-against-OpenSSL-in-non-standard-locatio.patch
@@ -17,7 +17,7 @@ source:
 
 build:
   number: 0
-  script: # [not win]
+  script:  # [not win]
     - sed -i.bak "/sys\/types.h/d" $PREFIX/include/openssl/e_os2.h  # [not win]
     - OPENSSL_PATH=$PREFIX {{ PYTHON }} -m pip install . -vv  # [not win]
     - mv $PREFIX/include/openssl/e_os2.h{.bak,}  # [not win]
