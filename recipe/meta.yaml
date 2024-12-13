@@ -9,9 +9,11 @@ source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name|lower }}-{{ version }}.tar.gz
   sha256: 6c2c1c7bb0e8aa768f7ca803da7dbc2666d4003b26bd7adf70233afc59d8cf33
   patches:
-   - 0001-Fix-use-of-ERR_reason_error_string.patch
-   - 0001-Fix-building-against-OpenSSL-in-non-standard-locatio.patch
-   - 0001-Fix-setting-X509.verify_-variables.patch
+    - 0001-Fix-building-against-OpenSSL-in-non-standard-locatio.patch
+    - 0002-Fix-setting-X509.verify_-variables.patch
+    - 0003-Fix-use-of-ERR_reason_error_string.patch
+    - 0004-Fix-double-free-from-bad-refactoring.patch
+    - 0005-Fix-windows-by-dropping-OpenSSL-1.1-support.patch
 
 build:
   number: 0
