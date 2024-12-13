@@ -17,6 +17,7 @@ source:
 
 build:
   number: 0
+  skip: true  # [win]
   script:
     - sed -i.bak "/sys\/types.h/d" $PREFIX/include/openssl/e_os2.h  # [not win]
     - OPENSSL_PATH=$PREFIX {{ PYTHON }} -m pip install . -vv  # [not win]
