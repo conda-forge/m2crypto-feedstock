@@ -35,7 +35,7 @@ requirements:
   host:
     - openssl
     # The workaround for the e_os2.h issue doesn't work on Windows
-    - openssl !=3.4  # [win]
+    - openssl <3.3  # [win]
     - pip
     - python
     - setuptools
