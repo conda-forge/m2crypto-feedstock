@@ -21,7 +21,12 @@ build:
     - sed -i.bak "/sys\/types.h/d" $PREFIX/include/openssl/e_os2.h  # [not win]
     - OPENSSL_PATH=$PREFIX {{ PYTHON }} -m pip install . -vv  # [not win]
     - mv $PREFIX/include/openssl/e_os2.h{.bak,}  # [not win]
-  script: "set \"OPENSSL_PATH=%LIBRARY_PREFIX%\" && {{ PYTHON }} -m pip install . -vv"  # [win]
+  script:  # [win]
+    - copy "%LIBRARY_PREFIX%\include\openssl\e_os2.h" "%LIBRARY_PREFIX%\include\openssl\e_os2.h.bak"  # [win]
+    - for /F "usebackq tokens=*" %%i in (`findstr /v "sys/types.h" "%LIBRARY_PREFIX%\include\openssl\e_os2.h.bak"`) do @echo %%i > "%LIBRARY_PREFIX%\include\openssl\e_os2.h"  # [win]
+    - set "OPENSSL_PATH=%LIBRARY_PREFIX%"  # [win]
+    - {{ PYTHON }} -m pip install . -vv  # [win]
+    - move /Y "%LIBRARY_PREFIX%\include\openssl\e_os2.h.bak" "%LIBRARY_PREFIX%\include\openssl\e_os2.h"  # [win]
 
 requirements:
   build:
