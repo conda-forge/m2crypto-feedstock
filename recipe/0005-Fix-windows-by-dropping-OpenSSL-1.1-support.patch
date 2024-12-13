@@ -1,0 +1,38 @@
+From ab3aaad6fa91dcaf2a33e4cf08b629ae00b85513 Mon Sep 17 00:00:00 2001
+From: Chris Burr <christopher.burr@cern.ch>
+Date: Fri, 13 Dec 2024 10:37:53 +0100
+Subject: [PATCH 5/5] Fix windows by dropping OpenSSL 1.1 support
+
+---
+ setup.py | 8 ++------
+ 1 file changed, 2 insertions(+), 6 deletions(-)
+
+diff --git a/setup.py b/setup.py
+index f3d4936..f193f76 100644
+--- a/setup.py
++++ b/setup.py
+@@ -149,9 +149,7 @@ class _M2CryptoBuildExt(build_ext.build_ext):
+         self.libraries = ['ssl', 'crypto']
+         if sys.platform == 'win32':
+             self.libraries = ['ssleay32', 'libeay32']
+-            if self.openssl_path and openssl_version(
+-                self.openssl_path, 0x10100000, True
+-            ):
++            if self.openssl_path and False:
+                 self.libraries = ['libssl', 'libcrypto']
+                 self.swig_opts.append('-D_WIN32')
+                 # Swig doesn't know the version of MSVC, which causes
+@@ -296,9 +294,7 @@ class _M2CryptoBuildExt(build_ext.build_ext):
+         # self.bundledlls is set
+         if sys.platform == 'win32':
+             ver_part = ''
+-            if self.openssl_path and openssl_version(
+-                self.openssl_path, 0x10100000, True
+-            ):
++            if self.openssl_path and False:
+                 ver_part += '-1_1'
+             if sys.maxsize > 2**32:
+                 ver_part += '-x64'
+-- 
+2.47.0
+

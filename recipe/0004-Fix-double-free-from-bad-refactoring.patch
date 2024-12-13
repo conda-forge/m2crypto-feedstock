@@ -1,0 +1,36 @@
+From b3c0e3f9458cc5d3599b2412d833dfa251c7bc59 Mon Sep 17 00:00:00 2001
+From: Chris Burr <christopher.burr@cern.ch>
+Date: Fri, 13 Dec 2024 10:36:27 +0100
+Subject: [PATCH 4/5] Fix double free from bad refactoring
+
+---
+ src/M2Crypto/SSL/Connection.py | 13 +------------
+ 1 file changed, 1 insertion(+), 12 deletions(-)
+
+diff --git a/src/M2Crypto/SSL/Connection.py b/src/M2Crypto/SSL/Connection.py
+index c5aab15..7d2dbb5 100644
+--- a/src/M2Crypto/SSL/Connection.py
++++ b/src/M2Crypto/SSL/Connection.py
+@@ -106,18 +106,7 @@ class Connection:
+             self._bio_freed = True
+ 
+     def __del__(self) -> None:
+-        # Notice that M2Crypto doesn't automatically shuts down the
+-        # connection here. You have to call self.close() in your
+-        # program, M2Crypto won't do it automatically for you.
+-        if getattr(self, 'sslbio', None):
+-            self.m2_bio_free(self.sslbio)
+-        if getattr(self, 'sockbio', None):
+-            self.m2_bio_free(self.sockbio)
+-        if self.ssl_close_flag == self.m2_bio_noclose and getattr(
+-            self, 'ssl', None
+-        ):
+-            self.m2_ssl_free(self.ssl)
+-        self.socket.close()
++        self._free_bio()
+ 
+     def close(self, freeBio: Optional[bool] = False) -> None:
+         """
+-- 
+2.47.0
+
