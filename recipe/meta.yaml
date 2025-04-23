@@ -1,5 +1,5 @@
 {% set name = "M2Crypto" %}
-{% set version = "0.43.0" %}
+{% set version = "0.45.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name|lower }}-{{ version }}.tar.gz
-  sha256: 6c2c1c7bb0e8aa768f7ca803da7dbc2666d4003b26bd7adf70233afc59d8cf33
+  sha256: d0fc81a8828edbf4308432b3040bf06bb26bad95abb9e7d4690b6118551e76ec
   patches:
     - 0001-Fix-building-against-OpenSSL-in-non-standard-locatio.patch
     - 0002-Fix-setting-X509.verify_-variables.patch
