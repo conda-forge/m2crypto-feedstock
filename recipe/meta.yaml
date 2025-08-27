@@ -16,7 +16,7 @@ source:
     - 0005-Fix-windows-by-dropping-OpenSSL-1.1-support.patch
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win]
   script:
     - sed -i.bak "/sys\/types.h/d" $PREFIX/include/openssl/e_os2.h  # [not win]
