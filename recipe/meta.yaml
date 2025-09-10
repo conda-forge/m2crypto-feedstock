@@ -11,9 +11,10 @@ source:
   patches:
     - 0004-Fix-double-free-from-bad-refactoring.patch
     - 0005-Fix-windows-by-dropping-OpenSSL-1.1-support.patch
+    - 0006-Disable-system-SDK-includes-on-macOS.patch
 
 build:
-  number: 1
+  number: 2
   skip: true  # [win]
   script:
     - sed -i.bak "/sys\/types.h/d" $PREFIX/include/openssl/e_os2.h  # [not win]
