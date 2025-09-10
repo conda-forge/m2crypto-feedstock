@@ -13,11 +13,14 @@ source:
     - 0005-Fix-windows-by-dropping-OpenSSL-1.1-support.patch
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win]
   script:
     - sed -i.bak "/sys\/types.h/d" $PREFIX/include/openssl/e_os2.h  # [not win]
-    - OPENSSL_PATH=$PREFIX {{ PYTHON }} -m pip install . -vv  # [not win]
+    - export LDFLAGS="-L$PREFIX/lib $LDFLAGS"  # [not win]
+    - export CFLAGS="-I$PREFIX/include $CFLAGS"  # [not win]  
+    - export OPENSSL_PATH=$PREFIX  # [not win]
+    - {{ PYTHON }} -m pip install . -vv  # [not win]
     - mv $PREFIX/include/openssl/e_os2.h{.bak,}  # [not win]
     - set "OPENSSL_PATH=%LIBRARY_PREFIX%"  # [win]
     - {{ PYTHON }} -m pip install . -vv  # [win]
