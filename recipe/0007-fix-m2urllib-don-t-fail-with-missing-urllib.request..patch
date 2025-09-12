@@ -1,0 +1,236 @@
+From 0bcde0ecd815a0788e7647a3758cd81bfe083398 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Mat=C4=9Bj=20Cepl?= <mcepl@cepl.eu>
+Date: Sun, 29 Jun 2025 19:00:11 +0200
+Subject: [PATCH] fix(m2urllib): don't fail with missing
+ urllib.request.URLopener
+
+Python 3.14 removed a long time deprecated urllib.request.URLopener.
+
+References: gh#python/cpython#84850
+---
+ src/M2Crypto/m2urllib.py | 193 +++++++++++++++++++++------------------
+ tests/test_ssl.py        |   1 -
+ 2 files changed, 102 insertions(+), 92 deletions(-)
+
+diff --git a/src/M2Crypto/m2urllib.py b/src/M2Crypto/m2urllib.py
+index 6653ce3..a6da727 100644
+--- a/src/M2Crypto/m2urllib.py
++++ b/src/M2Crypto/m2urllib.py
+@@ -19,100 +19,111 @@ from urllib.request import *  # noqa for other modules to import
+ from urllib.parse import *  # noqa for other modules to import
+ from urllib.error import *  # noqa for other modules to import
+ 
++if 'URLopener' in globals():
++    def open_https(
++        self: URLopener,
++        url: Union[str, bytes],
++        data: Optional[bytes] = None,
++        ssl_context: Optional[SSL.Context] = None,
++    ) -> addinfourl:
++        """
++        Open URL over the SSL connection.
+ 
+-def open_https(
+-    self: URLopener,
+-    url: Union[str, bytes],
+-    data: Optional[bytes] = None,
+-    ssl_context: Optional[SSL.Context] = None,
+-) -> addinfourl:
+-    """
+-    Open URL over the SSL connection.
+-
+-    :param url: URL to be opened
+-    :param data: data for the POST request
+-    :param ssl_context: SSL.Context to be used
+-    :return:
+-    """
+-    warnings.warn(
+-        'URLOpener has been deprecated in Py3k', DeprecationWarning
+-    )
++        :param url: URL to be opened
++        :param data: data for the POST request
++        :param ssl_context: SSL.Context to be used
++        :return:
++        """
++        warnings.warn(
++            'URLOpener has been deprecated in Py3k', DeprecationWarning
++        )
+ 
+-    if ssl_context is not None and isinstance(
+-        ssl_context, SSL.Context
+-    ):
+-        self.ctx = ssl_context
+-    else:
+-        self.ctx = SSL.Context()
+-    user_passwd = None
+-    if isinstance(url, (str,)):
+-        # https://docs.python.org/3/library/urllib.parse.html
+-        parsed = urlparse(url)
+-        host = parsed.hostname
+-        if parsed.port:
+-            host += ":{0}".format(parsed.port)
+-        user_passwd = parsed.password
+-        if parsed.password:
+-            user_passwd += ":{0}".format(parsed.password)
+-        selector = parsed.path
+-    else:
+-        host, selector = url
+-        urltype, rest = splittype(selector)
+-        url = rest
++        if ssl_context is not None and isinstance(
++            ssl_context, SSL.Context
++        ):
++            self.ctx = ssl_context
++        else:
++            self.ctx = SSL.Context()
+         user_passwd = None
+-        if urltype.lower() != 'http':
+-            realhost = None
++        if isinstance(url, (str,)):
++            # https://docs.python.org/3/library/urllib.parse.html
++            parsed = urlparse(url)
++            host = parsed.hostname
++            if parsed.port:
++                host += ":{0}".format(parsed.port)
++            user_passwd = parsed.password
++            if parsed.password:
++                user_passwd += ":{0}".format(parsed.password)
++            selector = parsed.path
+         else:
+-            try:  # python 2
+-                realhost, rest = splithost(rest)
+-                if realhost:
+-                    user_passwd, realhost = splituser(realhost)
+-                    if user_passwd:
+-                        selector = "%s://%s%s" % (
+-                            urltype,
+-                            realhost,
+-                            rest,
+-                        )
+-            except NameError:  # python 3 has no splithost
+-                parsed = urlparse(rest)
+-                host = parsed.hostname
+-                if parsed.port:
+-                    host += ":{0}".format(parsed.port)
+-                user_passwd = parsed.username
+-                if parsed.password:
+-                    user_passwd += ":{0}".format(parsed.password)
+-        # print("proxy via http:", host, selector)
+-    if not host:
+-        raise IOError('http error', 'no host given')
+-    if user_passwd:
+-        auth = base64.encodebytes(user_passwd).strip()
+-    else:
+-        auth = None
+-    # Start here!
+-    h = httpslib.HTTPSConnection(host=host, ssl_context=self.ctx)
+-    # h.set_debuglevel(1)
+-    # Stop here!
+-    if data is not None:
+-        h.putrequest('POST', selector)
+-        h.putheader(
+-            'Content-type', 'application/x-www-form-urlencoded'
+-        )
+-        h.putheader('Content-length', '%d' % len(data))
+-    else:
+-        h.putrequest('GET', selector)
+-    if auth:
+-        h.putheader('Authorization', 'Basic %s' % auth)
+-    for args in self.addheaders:
+-        h.putheader(*args)  # for python3 - used to use apply
+-    h.endheaders()
+-    if data is not None:
+-        h.send(data + '\r\n')
+-    # Here again!
+-    resp = h.getresponse()
+-    fp = resp.fp
+-    return addinfourl(fp, resp.msg, "https:" + url)
+-    # Stop again.
++            host, selector = url
++            urltype, rest = splittype(selector)
++            url = rest
++            user_passwd = None
++            if urltype.lower() != 'http':
++                realhost = None
++            else:
++                try:  # python 2
++                    realhost, rest = splithost(rest)
++                    if realhost:
++                        user_passwd, realhost = splituser(realhost)
++                        if user_passwd:
++                            selector = "%s://%s%s" % (
++                                urltype,
++                                realhost,
++                                rest,
++                            )
++                except NameError:  # python 3 has no splithost
++                    parsed = urlparse(rest)
++                    host = parsed.hostname
++                    if parsed.port:
++                        host += ":{0}".format(parsed.port)
++                    user_passwd = parsed.username
++                    if parsed.password:
++                        user_passwd += ":{0}".format(parsed.password)
++            # print("proxy via http:", host, selector)
++        if not host:
++            raise IOError('http error', 'no host given')
++        if user_passwd:
++            auth = base64.encodebytes(user_passwd).strip()
++        else:
++            auth = None
++        # Start here!
++        h = httpslib.HTTPSConnection(host=host, ssl_context=self.ctx)
++        # h.set_debuglevel(1)
++        # Stop here!
++        if data is not None:
++            h.putrequest('POST', selector)
++            h.putheader(
++                'Content-type', 'application/x-www-form-urlencoded'
++            )
++            h.putheader('Content-length', '%d' % len(data))
++        else:
++            h.putrequest('GET', selector)
++        if auth:
++            h.putheader('Authorization', 'Basic %s' % auth)
++        for args in self.addheaders:
++            h.putheader(*args)  # for python3 - used to use apply
++        h.endheaders()
++        if data is not None:
++            h.send(data + '\r\n')
++        # Here again!
++        resp = h.getresponse()
++        fp = resp.fp
++        return addinfourl(fp, resp.msg, "https:" + url)
++        # Stop again.
++
++
++    # Minor brain surgery.
++    URLopener.open_https = open_https
++else:
++    import sys
++
++    class URLopener:
++        msg = f'Python {"%d.%d" % (sys.version_info[:2])} does not support URLopener any more.'
+ 
++        def __init__(self):
++            raise RuntimeError(self.msg)
+ 
+-# Minor brain surgery.
+-URLopener.open_https = open_https
++        def open_https(self):
++            raise RuntimeError(self.msg)
+diff --git a/tests/test_ssl.py b/tests/test_ssl.py
+index 3ada7a0..9efc548 100644
+--- a/tests/test_ssl.py
++++ b/tests/test_ssl.py
+@@ -39,7 +39,6 @@ from M2Crypto import (
+     ftpslib,
+     httpslib,
+     m2,
+-    m2urllib,
+     m2urllib2,
+     m2xmlrpclib,
+     util,
+-- 
+2.48.1
+

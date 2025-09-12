@@ -1,0 +1,31 @@
+From 1234567890abcdef1234567890abcdef12345678 Mon Sep 17 00:00:00 2001
+From: conda-forge <conda-forge@anaconda.com>
+Date: Wed, 10 Sep 2025 12:00:00 +0000
+Subject: [PATCH 6/6] Disable system SDK includes on macOS for conda builds
+
+On macOS, M2Crypto tries to include system SDK headers which can cause
+compatibility issues with newer Xcode versions. In conda environments,
+we should rely on conda's headers instead of system SDK headers.
+
+---
+ setup.py | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/setup.py b/setup.py
+index 2a3fc15..f3d4936 100644
+--- a/setup.py
++++ b/setup.py
+@@ -60,6 +60,11 @@ def _get_additional_includes():
+         err = glob.glob(globmask)
+     else:
+         if platform.system() == "Darwin":
++            # In conda environments, skip system SDK includes to avoid
++            # compatibility issues with newer Xcode versions
++            if os.environ.get('CONDA_BUILD'):
++                return []
++            
+             sdk_path = (
+                 subprocess.check_output(['xcrun', '--show-sdk-path'])
+                 .decode()
+-- 
+2.47.0

@@ -1,0 +1,91 @@
+schema_version: 1
+
+context:
+  name: M2Crypto
+  version: 0.45.1
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/${{ name|lower }}-${{ version }}.tar.gz
+  sha256: d0fc81a8828edbf4308432b3040bf06bb26bad95abb9e7d4690b6118551e76ec
+  patches:
+    - 0004-Fix-double-free-from-bad-refactoring.patch
+    - 0005-Fix-windows-by-dropping-OpenSSL-1.1-support.patch
+    - 0006-Disable-system-SDK-includes-on-macOS.patch
+    - 0007-fix-m2urllib-don-t-fail-with-missing-urllib.request..patch
+
+build:
+  number: 2
+  skip: win
+  script:
+    - if: not win
+      then: sed -i.bak -e "/sys\/types.h/d" -e "/stdint.h>/d" $PREFIX/include/openssl/e_os2.h
+    - if: not win
+      then: export LDFLAGS="-L$PREFIX/lib $LDFLAGS"
+    - if: not win
+      then: export CFLAGS="-I$PREFIX/include $CFLAGS"
+    - if: not win
+      then: export OPENSSL_PATH=$PREFIX
+    - if: not win
+      then: ${{ PYTHON }} -m pip install . -vv
+    - if: not win
+      then: mv $PREFIX/include/openssl/e_os2.h{.bak,}
+    - if: win
+      then: set "OPENSSL_PATH=%LIBRARY_PREFIX%"
+    - if: win
+      then: ${{ PYTHON }} -m pip install . -vv
+
+requirements:
+  build:
+    - if: build_platform != target_platform
+      then: python
+    - if: build_platform != target_platform
+      then: cross-python_${{ target_platform }}
+    - if: build_platform != target_platform
+      then: swig
+    - ${{ compiler("c") }}
+    - ${{ stdlib("c") }}
+  host:
+    - openssl
+    # The workaround for the e_os2.h issue doesn't work on Windows
+    - if: win
+      then: openssl <3.3
+    - if: win
+      then: swig <4.3
+    - pip
+    - python
+    - setuptools
+    - swig >=2.0.4
+  run:
+    - openssl
+    - python
+
+tests:
+  - python:
+      imports:
+        - M2Crypto
+        - M2Crypto.SSL
+  - files:
+      source:
+        - tests
+    requirements:
+      run:
+        - parameterized
+        - pip
+        - pytest
+    script:
+      - pip check
+      - python -m pytest tests/ -v -rs -k "not test_ssl"
+
+about:
+  license: MIT
+  license_file: LICENCE
+  summary: "M2Crypto: A Python crypto and SSL toolkit"
+  homepage: https://gitlab.com/m2crypto/m2crypto
+
+extra:
+  recipe-maintainers:
+    - chrisburr
