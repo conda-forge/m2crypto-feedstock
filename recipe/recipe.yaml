@@ -21,7 +21,7 @@ build:
   skip: win
   script:
     - if: not win
-      then: sed -i.bak "/sys\/types.h/d" $PREFIX/include/openssl/e_os2.h
+      then: sed -i.bak -e "/sys\/types.h/d" -e "/stdint.h>/d" $PREFIX/include/openssl/e_os2.h
     - if: not win
       then: export LDFLAGS="-L$PREFIX/lib $LDFLAGS"
     - if: not win
