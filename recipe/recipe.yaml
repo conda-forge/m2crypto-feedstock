@@ -2,7 +2,7 @@ schema_version: 1
 
 context:
   name: M2Crypto
-  version: 0.45.1
+  version: "0.46.0"
 
 package:
   name: ${{ name|lower }}
@@ -10,7 +10,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/${{ name|lower }}-${{ version }}.tar.gz
-  sha256: d0fc81a8828edbf4308432b3040bf06bb26bad95abb9e7d4690b6118551e76ec
+  sha256: 5de32576c3bfc84fc2972ba703305dcba35dfb40383273e9552a7e17175dcb72
   patches:
     - 0004-Fix-double-free-from-bad-refactoring.patch
     - 0005-Fix-windows-by-dropping-OpenSSL-1.1-support.patch
@@ -18,43 +18,36 @@ source:
     - 0007-fix-m2urllib-don-t-fail-with-missing-urllib.request..patch
 
 build:
-  number: 2
+  number: 0
   skip: win
   script:
     - if: not win
-      then: sed -i.bak -e "/sys\/types.h/d" -e "/stdint.h>/d" $PREFIX/include/openssl/e_os2.h
-    - if: not win
-      then: export LDFLAGS="-L$PREFIX/lib $LDFLAGS"
-    - if: not win
-      then: export CFLAGS="-I$PREFIX/include $CFLAGS"
-    - if: not win
-      then: export OPENSSL_PATH=$PREFIX
-    - if: not win
-      then: ${{ PYTHON }} -m pip install . -vv
-    - if: not win
-      then: mv $PREFIX/include/openssl/e_os2.h{.bak,}
-    - if: win
-      then: set "OPENSSL_PATH=%LIBRARY_PREFIX%"
-    - if: win
-      then: ${{ PYTHON }} -m pip install . -vv
-
+      then:
+        - sed -i.bak -e "/sys\/types.h/d" -e "/stdint.h>/d" $PREFIX/include/openssl/e_os2.h
+        - export LDFLAGS="-L$PREFIX/lib $LDFLAGS"
+        - export CFLAGS="-I$PREFIX/include $CFLAGS"
+        - export OPENSSL_PATH=$PREFIX
+        - ${{ PYTHON }} -m pip install . -vv
+        - mv $PREFIX/include/openssl/e_os2.h{.bak,}
+      else:
+        - set "OPENSSL_PATH=%LIBRARY_PREFIX%"
+        - ${{ PYTHON }} -m pip install . -vv
 requirements:
   build:
     - if: build_platform != target_platform
-      then: python
-    - if: build_platform != target_platform
-      then: cross-python_${{ target_platform }}
-    - if: build_platform != target_platform
-      then: swig
+      then:
+        - python
+        - cross-python_${{ target_platform }}
+        - swig
     - ${{ compiler("c") }}
     - ${{ stdlib("c") }}
   host:
     - openssl
     # The workaround for the e_os2.h issue doesn't work on Windows
     - if: win
-      then: openssl <3.3
-    - if: win
-      then: swig <4.3
+      then:
+        - openssl <3.3
+        - swig <4.3
     - pip
     - python
     - setuptools
