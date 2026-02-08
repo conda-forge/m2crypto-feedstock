@@ -2,7 +2,7 @@ schema_version: 1
 
 context:
   name: M2Crypto
-  version: "0.46.2"
+  version: "0.47.0"
 
 package:
   name: ${{ name|lower }}
@@ -10,7 +10,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/${{ name|lower }}-${{ version }}.tar.gz
-  sha256: 13c2fa89562f7b8af40cc74b55f490be5e2ab8ccfb739f11c16d3ce6221a61ba
+  sha256: 9256300be1e0412be802aa1f827e0ce7f94deb1099b8ccdcfd9867a7f0f975bf
   patches:
     - 0006-Disable-system-SDK-includes-on-macOS.patch
     - 0008-Use-Python-3-C-API-names-dropped-by-SWIG-4.3.patch
