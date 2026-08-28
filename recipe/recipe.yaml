@@ -67,7 +67,7 @@ tests:
 
 about:
   license: BSD-2-Clause
-  license_file: LICENSE.BSD-2-Clause.txt
+  license_file: LICENSES/BSD-2-Clause.txt
   summary: "M2Crypto: A Python crypto and SSL toolkit"
   homepage: https://gitlab.com/m2crypto/m2crypto
 
