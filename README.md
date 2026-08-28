@@ -3,11 +3,15 @@ About m2crypto-feedstock
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/m2crypto-feedstock/blob/main/LICENSE.txt)
 
-Home: https://gitlab.com/m2crypto/m2crypto
+Home: https://sr.ht/~mcepl/m2crypto/
 
 Package license: BSD-2-Clause
 
 Summary: M2Crypto: A Python crypto and SSL toolkit
+
+Development: https://codeberg.org/mcepl/m2crypto/
+
+Documentation: https://m2crypto.readthedocs.io/en/latest/
 
 Current build status
 ====================

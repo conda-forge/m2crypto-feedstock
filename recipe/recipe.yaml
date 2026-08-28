@@ -2,7 +2,7 @@ schema_version: 1
 
 context:
   name: M2Crypto
-  version: "0.48.0"
+  version: "0.49.0"
 
 package:
   name: ${{ name|lower }}
@@ -10,10 +10,9 @@ package:
 
 source:
   url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/${{ name|lower }}-${{ version }}.tar.gz
-  sha256: 178e290f558ddf0379aaefd34c0a8ddb21f21502594e588f928dda85f1ad202b
+  sha256: 604b9cdd7c1bb9e73e54a189643d56d08bf841691775122962430ee2ca3506fe
   patches:
     - 0006-Disable-system-SDK-includes-on-macOS.patch
-    - 0008-Use-Python-3-C-API-names-dropped-by-SWIG-4.3.patch
 
 build:
   number: 0
@@ -68,7 +67,9 @@ about:
   license: BSD-2-Clause
   license_file: LICENSES/BSD-2-Clause.txt
   summary: "M2Crypto: A Python crypto and SSL toolkit"
-  homepage: https://gitlab.com/m2crypto/m2crypto
+  homepage: https://sr.ht/~mcepl/m2crypto/
+  repository: https://codeberg.org/mcepl/m2crypto/
+  documentation: https://m2crypto.readthedocs.io/en/latest/
 
 extra:
   recipe-maintainers:
