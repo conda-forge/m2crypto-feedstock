@@ -2,7 +2,7 @@ schema_version: 1
 
 context:
   name: M2Crypto
-  version: "0.50.0"
+  version: "0.51.0"
 
 package:
   name: ${{ name|lower }}
@@ -10,7 +10,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/${{ name|lower }}-${{ version }}.tar.gz
-  sha256: 4162b1fbb51ef3b3f98cb81e086d706cad8fe7620a5549f398c1efbc0dad0d92
+  sha256: 5428f6601086a8f5e41aa70248b3b983443e7badf263551c5104ba2ec0c9d955
   patches:
     - 0006-Disable-system-SDK-includes-on-macOS.patch
 
